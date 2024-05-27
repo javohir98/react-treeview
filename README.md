@@ -1,6 +1,6 @@
 # React Treeview with Checkboxes
 
-## Usage
+## Run test
 
 npm test or yarn test
 

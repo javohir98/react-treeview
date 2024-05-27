@@ -47,6 +47,7 @@ export const TreeViewProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const selected = params.get("selected");
+
     if (selected) {
       setSelectedNodes(new Set(selected.split(",")));
     }
@@ -54,11 +55,13 @@ export const TreeViewProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
+
     if (selectedNodes.size > 0) {
       params.set("selected", Array.from(selectedNodes).join(","));
     } else {
       params.delete("selected");
     }
+
     navigate(
       {
         pathname: location.pathname,
