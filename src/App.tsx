@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import TreeView from "./components/TreeView";
+import { BrowserRouter as Router } from "react-router-dom";
 
-function App() {
+const data = [
+  {
+    label: "Node 1",
+    id: "1",
+    children: [
+      {
+        label: "Child 1.1",
+        id: "1.1",
+        children: [
+          { label: "Child 1.1.1", id: "1.1.1" },
+          { label: "Child 1.1.2", id: "1.1.2" },
+        ],
+      },
+      { label: "Child 1.2", id: "1.2" },
+    ],
+  },
+  { label: "Node 2", id: "2" },
+];
+
+const App: React.FC = () => {
+  const [selectedNodes, setSelectedNodes] = useState<string[]>([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="p-4">
+        <TreeView
+          data={data}
+          onChange={setSelectedNodes}
+          renderLabel={(node) => (
+            <span className="text-blue-500">{node.label}</span>
+          )}
+        />
+        <div className="mt-4">Selected Nodes: {selectedNodes.join(", ")}</div>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
